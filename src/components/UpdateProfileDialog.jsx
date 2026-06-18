@@ -21,7 +21,7 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
   const { user } = useSelector((store) => store.auth);
 
   const [input, setInput] = useState({
-    fullName: user?.fullName || "",
+    fullname: user?.fullname || "",
     email: user?.email || "",
     phoneNumber: user?.phoneNumber || "",
     bio: user?.profile?.bio || "",
@@ -42,7 +42,7 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
   const submitHandler = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("fullName", input.fullName);
+    formData.append("fullname", input.fullname);
     formData.append("email", input.email);
     formData.append("phoneNumber", input.phoneNumber);
     formData.append("bio", input.bio);
@@ -78,7 +78,7 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
 
   return (
     <div>
-      <Dialog open={open} onOpenChange={setOpen}>
+      <Dialog open={open} >
         <DialogContent
           className="sm:max-w-[425px]"
           onInteractOutside={() => setOpen(false)}
@@ -94,9 +94,9 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
                 </Label>
                 <Input
                   id="name"
-                  name="fullName"
+                  name="fullname"
                   type="text"
-                  value={input.fullName}
+                  value={input.fullname}
                   onChange={changeEventHandler}
                   className="col-span-3"
                 />
@@ -165,17 +165,9 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
               </div>
             </div>
             <DialogFooter>
-              {loading ? (
-                <Button className="w-full my-4">
-                  {" "}
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please
-                  wait{" "}
-                </Button>
-              ) : (
-                <Button type="submit" className="w-full my-4">
-                  Update
-                </Button>
-              )}
+             {
+               loading ? <Button className="w-full my-4"> <Loader2 className='mr-2 h-4 w-4 animate-spin' /> Please wait </Button> : <Button type="submit" className="w-full my-4">Update</Button>
+             }
             </DialogFooter>
           </form>
         </DialogContent>
